@@ -14,7 +14,7 @@
     {{ with .Params.tags }}
     <div class="mb-3">
       {{ range first 2 . }}
-      <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill mr-1">{{ . }}</a>
+      <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag-pill mr-1">{{ . }}</a>
       {{ end }}
     </div>
     {{ end }}

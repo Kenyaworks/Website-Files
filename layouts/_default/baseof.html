@@ -9,10 +9,10 @@
     {{- end -}}
   </title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-  {{ with .Params.image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
-  <link rel="icon" type="image/png" sizes="192x192" href="{{ "/favicon.png" | relURL }}">
-  <link rel="shortcut icon" href="{{ "/favicon.png" | relURL }}">
-  <link rel="stylesheet" href="{{ "/css/screen.css" | relURL }}">
+  {{ with .Params.image }}<meta property="og:image" content="{{ . | strings.TrimPrefix "/" | absURL }}">{{ end }}
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ "favicon.png" | relURL }}">
+  <link rel="shortcut icon" href="{{ "favicon.png" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/screen.css" | relURL }}">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -31,7 +31,7 @@
     const btn = document.getElementById('mobile-nav-btn');
     const menu = document.getElementById('mobile-menu');
     if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('open'));
-    window.KW_SEARCH_INDEX = "{{ "/index.json" | relURL }}";
+    window.KW_SEARCH_INDEX = "{{ "index.json" | relURL }}";
   </script>
   {{ with resources.Get "js/fuse.basic.min.js" }}
     <script src="{{ (. | minify | fingerprint).RelPermalink }}" defer></script>

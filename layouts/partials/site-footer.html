@@ -14,8 +14,8 @@
 We are not simply working in Kenya—we are part of it. This foundation allows us to build trusted, long-term partnerships that create lasting opportunities for children, strengthen families, and empower whole communities to shape their own futures.</p>
       </div>
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap; flex-shrink:0;">
-        <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-primary" style="background:var(--kw-accent); font-size:0.875rem; padding:0.6rem 1.5rem;">Donate Now</a>
-        <a href="{{ "/get-involved/#sponsor" | relURL }}" class="btn-white" style="font-size:0.875rem; padding:0.6rem 1.5rem;">Sponsor a Student</a>
+        <a href="{{ "get-involved/#donate" | relURL }}" class="btn-primary" style="background:var(--kw-accent); font-size:0.875rem; padding:0.6rem 1.5rem;">Donate Now</a>
+        <a href="{{ "get-involved/#sponsor" | relURL }}" class="btn-white" style="font-size:0.875rem; padding:0.6rem 1.5rem;">Sponsor a Student</a>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@ We are not simply working in Kenya—we are part of it. This foundation allows u
       {{/* Brand column */}}
       <div class="md:col-span-2">
         {{ if $logoSrc }}
-        <a href="{{ "/" | relURL }}">
+        <a href="{{ "" | relURL }}">
           <img src="{{ $logoSrc }}" alt="Kenya Works" style="height:40px; width:auto; margin-bottom:1rem;" />
         </a>
         {{ end }}
@@ -82,7 +82,7 @@ We are not simply working in Kenya—we are part of it. This foundation allows u
             (dict "label" "Pamoja Guesthouse" "url" "/pamoja/")
           ) }}
           <li>
-            <a href="{{ .url | relURL }}"
+            <a href="{{ .url | strings.TrimPrefix "/" | relURL }}"
                style="color:var(--kw-text-muted); font-size:0.875rem; text-decoration:none;"
                onmouseover="this.style.color='var(--kw-primary)';"
                onmouseout="this.style.color='var(--kw-text-muted)';">{{ .label }}</a>
@@ -104,7 +104,7 @@ We are not simply working in Kenya—we are part of it. This foundation allows u
             (dict "label" "Contact"        "url" "/contact/")
           ) }}
           <li>
-            <a href="{{ .url | relURL }}"
+            <a href="{{ .url | strings.TrimPrefix "/" | relURL }}"
                style="color:var(--kw-text-muted); font-size:0.875rem; text-decoration:none;"
                onmouseover="this.style.color='var(--kw-primary)';"
                onmouseout="this.style.color='var(--kw-text-muted)';">{{ .label }}</a>

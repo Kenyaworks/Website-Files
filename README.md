@@ -152,4 +152,32 @@ Post body text uses the `.gh-content` class (Roboto 300, 16px, line-height 1.65)
 
 ## Deployment
 
-Set `baseURL` in `hugo.toml` to the production domain, then run `hugo` and upload the `public/` directory to your host. The site is fully static — no server-side runtime required.
+The site is built and published to **GitHub Pages** by GitHub Actions — no local build or manual upload is needed.
+
+- **Automatic deploys:** every push to `main` runs [`.github/workflows/hugo.yml`](.github/workflows/hugo.yml), which builds the site with Hugo extended and deploys `public/` to Pages.
+- **Manual deploys:** go to **Actions → Deploy Hugo site to Pages → Run workflow** (or run `gh workflow run hugo.yml`).
+- **Pull request checks:** [`.github/workflows/build-check.yml`](.github/workflows/build-check.yml) builds the site on every PR to `main` to catch broken templates or content before merge. It does not deploy.
+
+The Hugo version used in CI is pinned via `HUGO_VERSION` in both workflow files — bump it there when upgrading Hugo locally so CI output matches local builds.
+
+The workflow overrides `baseURL` at build time with the URL GitHub Pages reports. Until the custom domain is set up, the site is served for testing at **https://kenyaworks.github.io/Website-Files/**.
+
+### Links must work under a subpath
+
+Because the test site lives under `/Website-Files/`, internal links must not be hard-coded from the site root:
+
+- **Templates:** pass paths to `relURL` **without** a leading slash — `{{ "stories/" | relURL }}`, not `{{ "/stories/" | relURL }}` (a leading slash makes Hugo drop the subpath). Use `.RelPermalink` for pages and resources. Menu entries' `.URL` already includes the subpath — output it as-is.
+- **Markdown content:** root-relative links like `[Stories](/stories/)` are fine — `layouts/_default/_markup/render-link.html` rewrites them.
+- **Raw HTML in content:** avoid `href="/..."`; use a Markdown link instead.
+
+### One-time setup
+
+In the repository, **Settings → Pages → Build and deployment → Source** must be set to **GitHub Actions**.
+
+### Cutting over to www.kenyaworks.org
+
+`baseURL` in `hugo.toml` is already `https://www.kenyaworks.org/`. When the site is ready to go live:
+
+1. Add a `static/CNAME` file containing `www.kenyaworks.org` so it's copied into every build. **Don't add this earlier** — once a custom domain is set, GitHub redirects the github.io test URL to it.
+2. Point DNS at GitHub Pages: a `CNAME` record for `www` → `kenyaworks.github.io` (and optionally A/AAAA records for the apex `kenyaworks.org`).
+3. Set the domain in **Settings → Pages → Custom domain** and enable **Enforce HTTPS**.

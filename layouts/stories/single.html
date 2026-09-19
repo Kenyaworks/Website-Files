@@ -16,7 +16,7 @@
       {{ with .Params.tags }}
       <div style="margin-bottom:0.75rem;">
         {{ range first 2 . }}
-        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill" style="background:rgba(255,255,255,0.15); color:white; margin-right:0.4rem;">{{ . }}</a>
+        <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag-pill" style="background:rgba(255,255,255,0.15); color:white; margin-right:0.4rem;">{{ . }}</a>
         {{ end }}
       </div>
       {{ end }}
@@ -32,7 +32,7 @@
       {{ with .Params.tags }}
       <div style="margin-bottom:0.75rem;">
         {{ range first 2 . }}
-        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill" style="background:rgba(255,255,255,0.15); color:white; margin-right:0.4rem;">{{ . }}</a>
+        <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag-pill" style="background:rgba(255,255,255,0.15); color:white; margin-right:0.4rem;">{{ . }}</a>
         {{ end }}
       </div>
       {{ end }}
@@ -81,7 +81,7 @@
       <span style="font-size:0.8rem; color:var(--kw-text-subtle); font-weight:500; text-transform:uppercase; letter-spacing:0.1em;">Filed under</span>
       <div style="margin-top:0.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
         {{ range . }}
-        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill">{{ . }}</a>
+        <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag-pill">{{ . }}</a>
         {{ end }}
       </div>
     </div>
@@ -92,8 +92,8 @@
     <p style="color:rgba(255,255,255,0.85); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin-bottom:0.5rem;">Make an impact</p>
     <h2 style="color:white; font-size:1.75rem; margin-bottom:1.25rem;">Stories like this one depend on your support.</h2>
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-      <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-primary">Donate Now</a>
-      <a href="{{ "/get-involved/#sponsor" | relURL }}" class="btn-white">Sponsor a Student</a>
+      <a href="{{ "get-involved/#donate" | relURL }}" class="btn-primary">Donate Now</a>
+      <a href="{{ "get-involved/#sponsor" | relURL }}" class="btn-white">Sponsor a Student</a>
     </div>
   </div>
 
