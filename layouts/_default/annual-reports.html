@@ -47,7 +47,7 @@
   <div class="grid md:grid-cols-2" style="gap:2.5rem; align-items:start;">
 
     {{/* Cover image — clickable, full portrait size */}}
-    <a href="/reports/kenya-works-annual-report-2025.pdf" style="display:block; border-radius:1rem; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.18); text-decoration:none; line-height:0;">
+    <a href="{{ "reports/kenya-works-annual-report-2025.pdf" | relURL }}" style="display:block; border-radius:1rem; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.18); text-decoration:none; line-height:0;">
       {{ if $cover2025 }}
       <img src="{{ $cover2025 }}" alt="2025 Annual Report cover"
            style="width:100%; height:auto; display:block;" />
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <a href="/reports/kenya-works-annual-report-2025.pdf" class="btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem;">
+      <a href="{{ "reports/kenya-works-annual-report-2025.pdf" | relURL }}" class="btn-primary" style="display:inline-flex; align-items:center; gap:0.5rem;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download 2025 Report
       </a>
@@ -109,7 +109,7 @@
 
     <div class="grid md:grid-cols-3 sm:grid-cols-2" style="gap:1.25rem;">
       {{ range $reports }}
-      <a href="/reports/kenya-works-annual-report-{{ .year }}.pdf"
+      <a href="{{ printf "reports/kenya-works-annual-report-%v.pdf" .year | relURL }}"
          style="display:block; position:relative; border-radius:1rem; overflow:hidden; text-decoration:none; height:200px; background:#0a3159; transition:transform 0.2s, box-shadow 0.2s;"
          onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.2)'"
          onmouseout="this.style.transform='';this.style.boxShadow=''">

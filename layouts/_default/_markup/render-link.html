@@ -1,0 +1,8 @@
+{{- /* Prefix root-relative Markdown links ("/stories/") with the baseURL path so
+       they work when the site is served from a subpath (e.g. GitHub Pages). */ -}}
+{{- $dest := .Destination -}}
+{{- if and (hasPrefix $dest "/") (not (hasPrefix $dest "//")) -}}
+  {{- $dest = $dest | strings.TrimPrefix "/" | relURL -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
+{{- /* chomp trailing newline */ -}}
