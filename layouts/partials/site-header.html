@@ -1,0 +1,74 @@
+{{ $logoSrc := "" }}
+{{ with resources.Get "images/kenya_works.png" }}
+  {{ $logoSrc = (.Resize "x100 webp").RelPermalink }}
+{{ end }}
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <a href="{{ "/" | relURL }}" style="text-decoration:none;">
+        <img src="{{ $logoSrc }}" alt="Kenya Works" style="height:50px; width:auto;" />
+      </a>
+
+      <nav class="site-nav hidden md:flex items-center gap-5">
+        {{ range .Site.Menus.main }}
+        {{ if .HasChildren }}
+        <div class="relative group flex items-center">
+          <a href="{{ .URL | relURL }}" class="flex items-center gap-1">
+            {{ .Name }}
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:rotate-180"><path d="M2 4l4 4 4-4"/></svg>
+          </a>
+          <div class="hidden group-hover:block absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
+            <div style="background:white; border-radius:0.5rem; box-shadow:0 4px 16px rgba(0,0,0,0.12); min-width:160px; padding:0.5rem 0;">
+              {{ range .Children }}
+              <a href="{{ .URL | relURL }}" style="display:block; padding:0.6rem 1.25rem; white-space:nowrap;">{{ .Name }}</a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        {{ else }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{ end }}
+        {{ end }}
+      </nav>
+
+      <div class="hidden md:flex items-center gap-3">
+        <button type="button" data-kw-search-open class="kw-search-trigger" aria-label="Search this site" title="Search (press /)">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+        <a href="{{ "/get-involved/" | relURL }}" class="btn-secondary" style="padding:0.5rem 1.25rem; font-size:0.875rem;">Get Involved</a>
+        <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-primary" style="padding:0.5rem 1.25rem; font-size:0.875rem;">Donate</a>
+      </div>
+
+      <button id="mobile-nav-btn" class="md:hidden p-2 rounded" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden pb-4 border-t border-gray-100 pt-3">
+      <nav class="site-nav flex flex-col gap-4">
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{ if .HasChildren }}
+        {{ range .Children }}
+        <a href="{{ .URL | relURL }}" style="padding-left:1rem; font-size:0.875rem; color:var(--kw-text-muted);">{{ .Name }}</a>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+        <a href="{{ "/get-involved/" | relURL }}">Get Involved</a>
+        <button type="button" data-kw-search-open class="kw-search-trigger-mobile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Search
+        </button>
+      </nav>
+      <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-primary block text-center mt-4">Donate Now</a>
+    </div>
+  </div>
+</header>

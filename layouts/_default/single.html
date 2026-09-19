@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+{{ $heroImgSrc := "" }}
+{{ with .Params.heroImage }}
+  {{ with resources.Get (strings.TrimPrefix "/" .) }}
+    {{ $heroImgSrc = (.Resize (printf "%dx webp" (cond (gt .Width 1920) 1920 .Width))).RelPermalink }}
+  {{ end }}
+{{ end }}
+{{ $heroPos := default "center" .Params.heroImagePosition }}
+{{ $heroOverlay := default "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)" .Params.heroOverlay }}
+
+<div class="page-hero"{{ if $heroImgSrc }} style="{{ printf "background:%s, url('%s'); background-size:cover; background-position:%s;" $heroOverlay $heroImgSrc $heroPos | safeCSS }}"{{ end }}>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p style="margin-top:0.75rem; max-width:520px;">{{ . }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<div style="max-width:720px; margin:0 auto; padding:3rem 1.5rem;">
+  <div class="gh-content">
+    {{ .Content }}
+  </div>
+</div>
+
+{{ end }}

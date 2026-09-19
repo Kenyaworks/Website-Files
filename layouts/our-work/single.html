@@ -1,0 +1,156 @@
+{{ define "main" }}
+
+{{ $logoSrc := "" }}
+{{ with resources.Get (strings.TrimPrefix "/" .Params.logo) }}
+  {{ $logoSrc = (.Resize "x160 webp").RelPermalink }}
+{{ end }}
+
+{{ $featImgSrc := "" }}
+{{ with .Params.featureImage }}
+  {{ with resources.Get (strings.TrimPrefix "/" .) }}
+    {{ $featImgSrc = (.Resize "1400x webp").RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ $heroImgSrc := "" }}
+{{ with .Params.heroImage }}
+  {{ with resources.Get . }}
+    {{ $heroImgSrc = (.Resize (printf "%dx webp" (cond (gt .Width 1920) 1920 .Width))).RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ $heroPos := default "center" .Params.heroImagePosition }}
+{{ $heroOverlay := default "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.75) 100%)" .Params.heroOverlay }}
+
+{{/* Back-link — defaults to Our Work; Challenges pages point back at their own hub */}}
+{{ $backURL := default "/our-work/" .Params.backLink }}
+{{ $backLabel := default "Our Work" .Params.backLabel }}
+
+{{ if $heroImgSrc }}
+<section style="{{ printf "background:url('%s') %s/cover no-repeat; min-height:580px; position:relative;" $heroImgSrc $heroPos | safeCSS }}" class="flex items-end">
+  <div style="{{ printf "position:absolute; inset:0; background:%s;" $heroOverlay | safeCSS }}"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 pb-20 w-full" style="position:relative; z-index:1;">
+    <a href="{{ $backURL | relURL }}" style="color:rgba(255,255,255,0.6); font-size:0.875rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:1.5rem;">← {{ $backLabel }}</a>
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+      {{ if $logoSrc }}<img src="{{ $logoSrc }}" alt="{{ .Params.pillarName }}" style="height:72px; width:auto;" />{{ end }}
+      <span style="background:rgba(255,255,255,0.15); color:white; font-size:clamp(1.25rem,2.6vw,2rem); font-weight:600; padding:0.35rem 1.25rem; border-radius:999px; letter-spacing:0.04em; text-transform:uppercase;">{{ .Params.pillarName }}</span>
+    </div>
+    <h1 style="color:white; font-size:clamp(2rem,5vw,3.5rem); max-width:860px; line-height:1.15; margin-bottom:1rem; text-shadow:0 2px 8px rgba(0,0,0,0.5);">{{ .Params.headline }}</h1>
+    <p style="color:rgba(255,255,255,0.9); max-width:680px; line-height:1.7; font-size:1.15rem; text-shadow:0 1px 4px rgba(0,0,0,0.4);">{{ .Params.subheadline }}</p>
+  </div>
+</section>
+{{ else }}
+<div style="background:{{ .Params.heroGradient | safeCSS }}; padding:5rem 1.5rem; color:white;">
+  <div class="max-w-6xl mx-auto">
+    <a href="{{ $backURL | relURL }}" style="color:rgba(255,255,255,0.6); font-size:0.875rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; margin-bottom:1.5rem;">← {{ $backLabel }}</a>
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.25rem; flex-wrap:wrap;">
+      {{ if $logoSrc }}<img src="{{ $logoSrc }}" alt="{{ .Params.pillarName }}" style="height:72px; width:auto;" />{{ end }}
+      <span style="background:rgba(255,255,255,0.15); color:white; font-size:clamp(1.25rem,2.6vw,2rem); font-weight:600; padding:0.35rem 1.25rem; border-radius:999px; letter-spacing:0.04em; text-transform:uppercase;">{{ .Params.pillarName }}</span>
+    </div>
+    <h1 style="color:white; font-size:clamp(2rem,5vw,3rem); max-width:640px; line-height:1.2; margin-bottom:1rem;">{{ .Params.headline }}</h1>
+    <p style="color:rgba(255,255,255,0.82); max-width:520px; line-height:1.7; font-size:1.05rem;">{{ .Params.subheadline }}</p>
+  </div>
+</div>
+{{ end }}
+
+{{ if .Params.stats }}
+<div style="background:{{ .Params.accentColor | safeCSS }}; padding:1.5rem;">
+  <div class="max-w-6xl mx-auto" style="display:flex; gap:3rem; flex-wrap:wrap; justify-content:center; text-align:center;">
+    {{ range .Params.stats }}
+    <div>
+      <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:{{ default "white" $.Params.statNumColor }};">{{ .value }}</div>
+      <div style="color:rgba(255,255,255,0.8); font-size:0.8rem; font-weight:500; margin-top:0.25rem;">{{ .label }}</div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+
+  {{/* Feature image — full width */}}
+  {{ if $featImgSrc }}
+  <div style="border-radius:1rem; overflow:hidden; margin-bottom:2rem;">
+    <img src="{{ $featImgSrc }}" alt="{{ .Title }}" style="width:100%; display:block;" />
+  </div>
+  {{ end }}
+
+  {{/* CTA — full width below image */}}
+  {{ with .Params.cta }}
+  <div style="background:{{ $.Params.accentLight | safeCSS }}; border-radius:1rem; padding:2rem 2.5rem; margin-bottom:2rem; display:flex; flex-wrap:wrap; align-items:center; gap:1.5rem; justify-content:space-between;">
+    <div style="flex:1; min-width:260px;">
+      <h3 style="font-size:1.2rem; color:{{ $.Params.accentColor | safeCSS }}; margin-bottom:0.5rem;">{{ .title }}</h3>
+      <p style="color:var(--kw-text); font-size:0.925rem; line-height:1.65; margin:0;">{{ .text }}</p>
+    </div>
+    <a href="{{ .url | relURL }}" style="background:{{ $.Params.accentColor | safeCSS }}; color:white; padding:0.85rem 2rem; border-radius:0.375rem; font-weight:600; font-size:0.95rem; white-space:nowrap; text-decoration:none; flex-shrink:0;">{{ .button }}</a>
+  </div>
+  {{ end }}
+
+  {{/* Infobox — full width */}}
+  {{ with .Params.infobox }}
+  <div style="background:{{ $.Params.accentLight | safeCSS }}; border-radius:1rem; padding:1.5rem; margin-bottom:2rem;">
+    <h3 style="font-size:1.25rem; color:{{ $.Params.accentColor | safeCSS }}; margin-bottom:0.75rem;">{{ .title }}</h3>
+    <p style="color:var(--kw-text); line-height:1.75; font-size:0.95rem; margin:0;">{{ .text }}</p>
+  </div>
+  {{ end }}
+
+  {{/* Full-width content sections */}}
+  {{ with .Content }}
+  <div class="gh-content" style="max-width:100%;">{{ . }}</div>
+  {{ end }}
+
+  {{ $page := . }}
+  {{ $contentImages := .Params.contentImages }}
+  {{ if not $contentImages }}
+    {{ with .Params.contentImage }}
+      {{ $contentImages = slice (dict "image" . "caption" $page.Params.contentImageCaption) }}
+    {{ end }}
+  {{ end }}
+
+  {{ range $item := $contentImages }}
+    {{ with resources.Get $item.image }}
+    {{ $img := (.Resize "1200x webp") }}
+    <figure style="margin:2.5rem 0; border-radius:0.75rem; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <img src="{{ $img.RelPermalink }}" alt="{{ $item.caption }}" style="width:100%; display:block;" />
+      {{ with $item.caption }}
+      <figcaption style="padding:0.75rem 1rem; background:{{ $page.Params.accentLight | safeCSS }}; font-size:0.85rem; color:var(--kw-text-muted); font-style:italic;">{{ . }}</figcaption>
+      {{ end }}
+    </figure>
+    {{ end }}
+  {{ end }}
+
+  {{ with .Params.videoEmbed }}
+  <h2 style="font-size:1.5rem; color:var(--kw-dark); margin:2.5rem 0 1rem;">Watch: {{ default "Video" $.Params.videoTitle }}</h2>
+  <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:0.75rem; margin-bottom:2rem;">
+    <iframe src="{{ . }}" title="{{ $.Params.videoTitle }}" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+  </div>
+  {{ end }}
+
+  {{ with .Params.quotes }}
+    {{ range . }}
+    <blockquote style="border-left:4px solid {{ $.Params.accentColor | safeCSS }}; padding:1.25rem 1.5rem; background:{{ $.Params.accentLight | safeCSS }}; border-radius:0 0.5rem 0.5rem 0; margin:2.5rem 0; font-style:italic;">
+      <p style="font-size:1.05rem; color:var(--kw-dark); line-height:1.7; margin-bottom:0.5rem;">{{ .text }}</p>
+      <cite style="font-size:0.875rem; color:var(--kw-text-muted); font-style:normal;">— {{ .attribution }}</cite>
+    </blockquote>
+    {{ end }}
+  {{ else }}{{ with .Params.quote }}
+  <blockquote style="border-left:4px solid {{ $.Params.accentColor | safeCSS }}; padding:1.25rem 1.5rem; background:{{ $.Params.accentLight | safeCSS }}; border-radius:0 0.5rem 0.5rem 0; margin:2.5rem 0; font-style:italic;">
+    <p style="font-size:1.05rem; color:var(--kw-dark); line-height:1.7; margin-bottom:0.5rem;">{{ .text }}</p>
+    <cite style="font-size:0.875rem; color:var(--kw-text-muted); font-style:normal;">— {{ .attribution }}</cite>
+  </blockquote>
+  {{ end }}{{ end }}
+
+</div>
+
+{{ with .Params.footer }}
+<div style="background:{{ $.Params.accentColor | safeCSS }}; padding:3rem 1.5rem; text-align:center;">
+  <h2 style="color:white; font-size:1.75rem; margin-bottom:1rem;">{{ .headline }}</h2>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    {{ range .buttons }}
+    <a href="{{ .url | relURL }}" class="{{ .class }}"{{ with .style }} style="{{ . }}"{{ end }}>{{ .label }}</a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ end }}

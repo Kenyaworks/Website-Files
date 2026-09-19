@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+<div class="page-hero">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p style="margin-top:0.75rem; max-width:520px;">{{ . }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<div id="kw-search-page" style="max-width:760px; margin:0 auto; padding:3rem 1.5rem;">
+  <div class="kw-search-bar kw-search-bar-page">
+    <svg class="kw-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" placeholder="Search programs, challenges, and stories…" aria-label="Search query" autocomplete="off" spellcheck="false">
+  </div>
+
+  <div class="kw-search-results kw-search-results-page"></div>
+
+  <noscript>
+    <p class="kw-search-hint">Search needs JavaScript. You can browse
+      <a href="{{ "/our-work/" | relURL }}">Our Work</a>,
+      <a href="{{ "/our-work/challenges/" | relURL }}">Challenges</a>, or
+      <a href="{{ "/stories/" | relURL }}">Stories</a> instead.</p>
+  </noscript>
+</div>
+
+{{ end }}

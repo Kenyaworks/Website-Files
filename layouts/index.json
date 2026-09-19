@@ -1,0 +1,32 @@
+{{- /* Search index consumed by assets/js/search.js (Fuse.js).
+       Keys are short to keep the payload small: t=title, u=url, g=group,
+       s=summary, k=tags, d=year, b=body text. */ -}}
+{{- $challenges := slice "challenges" "poverty" "early-marriage" "female-genital-mutilation" "period-poverty" "gender-based-violence" -}}
+{{- $idx := slice -}}
+{{- $all := where .Site.Pages "Kind" "in" (slice "page" "section") -}}
+{{- range $all -}}
+  {{- if not .Params.searchExclude -}}
+    {{- $base := "" -}}
+    {{- with .File }}{{ $base = .BaseFileName }}{{ end -}}
+    {{- $group := "Pages" -}}
+    {{- if eq .Section "stories" -}}
+      {{- $group = "Stories" -}}
+    {{- else if eq .Section "our-work" -}}
+      {{- $group = cond (in $challenges $base) "Challenges" "Our Work" -}}
+    {{- end -}}
+    {{- $sum := .Params.summary | default .Params.description | default "" -}}
+    {{- $body := .Plain | htmlUnescape | replaceRE "\\s+" " " | strings.TrimSpace -}}
+    {{- $year := "" -}}
+    {{- if not .Date.IsZero }}{{ $year = .Date.Format "2006" }}{{ end -}}
+    {{- $idx = $idx | append (dict
+          "t" .Title
+          "u" .RelPermalink
+          "g" $group
+          "s" $sum
+          "k" (.Params.tags | default slice)
+          "d" $year
+          "b" (substr $body 0 1400)
+        ) -}}
+  {{- end -}}
+{{- end -}}
+{{- $idx | jsonify -}}

@@ -1,0 +1,133 @@
+{{ define "main" }}
+
+{{ $heroImgSrc := "" }}
+{{ with .Params.heroImage }}
+  {{ with resources.Get (strings.TrimPrefix "/" .) }}
+    {{ $heroImgSrc = (.Resize (printf "%dx webp" (cond (gt .Width 1920) 1920 .Width))).RelPermalink }}
+  {{ end }}
+{{ end }}
+{{ $heroPos := default "center" .Params.heroImagePosition }}
+{{ $heroOverlay := default "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)" .Params.heroOverlay }}
+
+<div class="page-hero"{{ if $heroImgSrc }} style="{{ printf "background:%s, url('%s'); background-size:cover; background-position:%s;" $heroOverlay $heroImgSrc $heroPos | safeCSS }}"{{ end }}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <h1>Community Opportunities</h1>
+    <p style="margin-top:0.75rem; max-width:580px;">
+      Our campus offers practical opportunities to learn, connect, and participate. Explore public resources, upcoming programs, and ways to get involved.
+    </p>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+
+  {{/* Library — expanded section with hours and schedule */}}
+  <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); margin-bottom:2rem;">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0;">📚</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin:0;">Library Access</h2>
+    </div>
+    <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7; margin-bottom:1.25rem;">
+      The library is open Monday to Friday, 8:00 AM–4:30 PM, and Saturday, 8:00 AM–1:00 PM. Closed Sundays and public holidays. See the schedule below for times when the library is open to the public and when schools or partner programs are using the space. Schedule may change.
+    </p>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+        <thead>
+          <tr style="background:var(--kw-primary-pale);">
+            <th style="padding:0.625rem 0.875rem; text-align:left; font-weight:600; color:var(--kw-dark); border-bottom:2px solid var(--kw-border);">Day</th>
+            <th style="padding:0.625rem 0.875rem; text-align:left; font-weight:600; color:var(--kw-dark); border-bottom:2px solid var(--kw-border);">8:00 AM–10:00 AM</th>
+            <th style="padding:0.625rem 0.875rem; text-align:left; font-weight:600; color:var(--kw-dark); border-bottom:2px solid var(--kw-border);">11:00 AM–1:00 PM</th>
+            <th style="padding:0.625rem 0.875rem; text-align:left; font-weight:600; color:var(--kw-dark); border-bottom:2px solid var(--kw-border);">2:00 PM–4:00 PM</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range (slice
+            (dict "day" "Monday"    "a" "Open to Public" "b" "Open to Public" "c" "Open to Public")
+            (dict "day" "Tuesday"   "a" "Open to Public" "b" "Open to Public" "c" "Open to Public")
+            (dict "day" "Wednesday" "a" "Open to Public" "b" "Cleverland"     "c" "Elfa Joy")
+            (dict "day" "Thursday"  "a" "Open to Public" "b" "Elfa Joy"       "c" "Gataka Hope")
+            (dict "day" "Friday"    "a" "Gataka Hope"    "b" "Cleverland"     "c" "Good Start")
+          ) }}
+          <tr style="border-bottom:1px solid var(--kw-border);">
+            <td style="padding:0.625rem 0.875rem; font-weight:500; color:var(--kw-dark);">{{ .day }}</td>
+            <td style="padding:0.625rem 0.875rem; color:{{ if eq .a "Open to Public" }}var(--kw-text-muted){{ else }}var(--kw-dark){{ end }};">{{ .a }}</td>
+            <td style="padding:0.625rem 0.875rem; color:{{ if eq .b "Open to Public" }}var(--kw-text-muted){{ else }}var(--kw-dark){{ end }};">{{ .b }}</td>
+            <td style="padding:0.625rem 0.875rem; color:{{ if eq .c "Open to Public" }}var(--kw-text-muted){{ else }}var(--kw-dark){{ end }};">{{ .c }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" style="margin-bottom:3rem;">
+
+    {{/* Computer Classes — text in place of button */}}
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">💻</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Computer Classes</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7; flex:1;">Build basic computer and digital skills in a supportive learning environment.</p>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7; margin-top:0.75rem;">Computer classes are offered in January, March, May, July, September, and November. Intake is ongoing.</p>
+    </div>
+
+    {{/* Volunteer Opportunities — text in place of button */}}
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">🤝</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Volunteer Opportunities</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7; flex:1;">Support campus life by sharing your time, skills, and encouragement.</p>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7;">Volunteer openings are available on Wednesdays and Fridays from 8:00 AM–5:00 PM.</p>
+    </div>
+
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">🎯</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Group Activities</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7;">Take part in workshops, gatherings, and shared community activities.</p>
+    </div>
+
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">🌱</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Mentorship</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7;">Find out how to join or support mentorship opportunities.</p>
+    </div>
+
+    {{/* Women's Empowerment Programs — text in place of button */}}
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">⭐</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Women's Empowerment Programs</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7; flex:1;">Learn when the next program begins and apply or join the interest list.</p>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7; margin-top:0.75rem;">Tailoring classes have intakes in January, May, and September. Current class times are available from the Kenya Works office.</p>
+    </div>
+
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">🏡</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Guest House Visits</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7;">Visitors can stay at our guest house while learning more about Kenya Works and the programs on campus.</p>
+    </div>
+
+    <div style="background:white; border-radius:1rem; padding:2rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); display:flex; flex-direction:column;">
+      <div style="background:var(--kw-primary-pale); border-radius:0.75rem; width:3rem; height:3rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.25rem; flex-shrink:0;">📋</div>
+      <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.5rem;">Internships and Attachments</h2>
+      <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.7;">Placement opportunities are available in January, May, and September.</p>
+    </div>
+
+  </div>
+
+  <div style="background:var(--kw-cream); border:1px solid var(--kw-border); border-radius:0.75rem; padding:1.25rem 1.5rem; font-size:0.875rem; color:var(--kw-text-muted); line-height:1.65;">
+    <strong style="color:var(--kw-dark);">Note:</strong> Eligibility and application details are included on each program page.
+  </div>
+
+  <div style="margin-top:3rem; padding-top:2rem; border-top:1px solid var(--kw-border);">
+    <h2 style="font-size:1.125rem; font-weight:600; color:var(--kw-dark); margin-bottom:0.75rem;">Contact Information</h2>
+    <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.8; margin-bottom:0.5rem;">
+      For questions or support, call the Kenya Works office at <strong style="color:var(--kw-dark);">0758813288</strong> or visit the main office.
+    </p>
+    <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.8; margin-bottom:0.5rem;">
+      Email <a href="mailto:hr@kenyaworks.org" style="color:var(--kw-primary); text-decoration:none;">hr@kenyaworks.org</a> for internships, job applications, and volunteer inquiries.
+    </p>
+    <p style="color:var(--kw-text-muted); font-size:0.9rem; line-height:1.8;">
+      Email <a href="mailto:admin@kenyaworks.org" style="color:var(--kw-primary); text-decoration:none;">admin@kenyaworks.org</a> for all other inquiries.
+    </p>
+  </div>
+
+</div>
+
+{{ end }}

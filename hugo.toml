@@ -1,0 +1,136 @@
+baseURL = "https://www.ptacek.land"
+locale = "en-us"
+title = "Kenya Works"
+paginate = 9
+
+[taxonomies]
+  tag = "tags"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  description = "Empowering vulnerable children and families in Kenya through shelter, education, menstrual health, and community advocacy."
+  donateURL   = "https://www.kenyaworks.org/donate"
+  sponsorURL  = "https://www.kenyaworks.org/sponsor"
+  fundraiseURL = "https://www.kenyaworks.org/fundraise"
+  ein          = "05-0623727"
+  paypalButtonId = "REPLACE_WITH_PAYPAL_BUTTON_ID"
+  mpesaPaybill   = "400222"
+  mpesaAccount   = "1148226#(Name of Donation Made)"
+  giveLivelySlug = "REPLACE_WITH_GIVELIVELY_SLUG"
+  mailingAddress = "PO Box 1572, Appleton, WI 54912"
+
+[menu]
+  [[menu.main]]
+    name       = "Our Work"
+    url        = "/our-work/"
+    weight     = 1
+    identifier = "our-work"
+
+  [[menu.main]]
+    name   = "Shelter Works"
+    url    = "/our-work/shelter-works/"
+    weight = 1
+    parent = "our-work"
+
+  [[menu.main]]
+    name   = "Education Works"
+    url    = "/our-work/education-works/"
+    weight = 2
+    parent = "our-work"
+
+  [[menu.main]]
+    name   = "MHH Works"
+    url    = "/our-work/mhh-works/"
+    weight = 3
+    parent = "our-work"
+
+  [[menu.main]]
+    name   = "Community Works"
+    url    = "/our-work/community-works/"
+    weight = 4
+    parent = "our-work"
+
+  [[menu.main]]
+    name       = "Challenges"
+    url        = "/our-work/challenges/"
+    weight     = 2
+    identifier = "challenges"
+
+  [[menu.main]]
+    name   = "Poverty"
+    url    = "/our-work/poverty/"
+    weight = 1
+    parent = "challenges"
+
+  [[menu.main]]
+    name   = "Early Marriage"
+    url    = "/our-work/early-marriage/"
+    weight = 2
+    parent = "challenges"
+
+  [[menu.main]]
+    name   = "FGM"
+    url    = "/our-work/female-genital-mutilation/"
+    weight = 3
+    parent = "challenges"
+
+  [[menu.main]]
+    name   = "Period Poverty"
+    url    = "/our-work/period-poverty/"
+    weight = 4
+    parent = "challenges"
+
+  [[menu.main]]
+    name   = "Gender-Based Violence"
+    url    = "/our-work/gender-based-violence/"
+    weight = 5
+    parent = "challenges"
+
+  [[menu.main]]
+    name   = "Stories"
+    url    = "/stories/"
+    weight = 3
+  [[menu.main]]
+    name   = "Pamoja Guesthouse"
+    url    = "/pamoja/"
+    weight = 4
+  [[menu.main]]
+    name       = "About"
+    url        = "/about/"
+    weight     = 5
+    identifier = "about"
+
+  [[menu.main]]
+    name   = "Our Team"
+    url    = "/our-team/"
+    weight = 1
+    parent = "about"
+
+  [[menu.main]]
+    name   = "Watch Our Story"
+    url    = "/our-story/"
+    weight = 2
+    parent = "about"
+
+  [[menu.main]]
+    name   = "Our Footprint"
+    url    = "/our-footprint/"
+    weight = 3
+    parent = "about"
+
+  [[menu.main]]
+    name   = "Community Opportunity"
+    url    = "/community-opportunity/"
+    weight = 4
+    parent = "about"
+
+  [[menu.main]]
+    name   = "Contact"
+    url    = "/contact/"
+    weight = 5
+    parent = "about"
+
+[markup.goldmark.renderer]
+  unsafe = true

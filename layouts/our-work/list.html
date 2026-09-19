@@ -1,0 +1,211 @@
+{{ define "main" }}
+
+{{/* Process pillar logos once */}}
+{{ $shelterLogoSrc := "" }}
+{{ with resources.Get "images/shelter_works_logo.png" }}
+  {{ $shelterLogoSrc = (.Resize "x160 webp").RelPermalink }}
+{{ end }}
+{{ $edLogoSrc := "" }}
+{{ with resources.Get "images/education_works_logo.png" }}
+  {{ $edLogoSrc = (.Resize "x160 webp").RelPermalink }}
+{{ end }}
+{{ $mhhLogoSrc := "" }}
+{{ with resources.Get "images/mmh_logo.png" }}
+  {{ $mhhLogoSrc = (.Resize "x160 webp").RelPermalink }}
+{{ end }}
+{{ $cwLogoSrc := "" }}
+{{ with resources.Get "images/community_works_logo.png" }}
+  {{ $cwLogoSrc = (.Resize "x160 webp").RelPermalink }}
+{{ end }}
+
+{{ $heroSrc := "" }}
+{{ with resources.Get "images/our_work_hero.jpg" }}
+  {{ $heroSrc = (.Resize (printf "%dx webp" (cond (gt .Width 1920) 1920 .Width))).RelPermalink }}
+{{ end }}
+
+<section style="{{ printf "background:url('%s') center/cover no-repeat; min-height:480px; position:relative;" $heroSrc | safeCSS }}" class="flex items-end">
+  <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.75) 100%);"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 pb-20 w-full" style="position:relative; z-index:1;">
+    <h1 style="color:white; font-size:clamp(2rem,5vw,3.5rem); line-height:1.15; margin-bottom:1rem; text-shadow:0 2px 8px rgba(0,0,0,0.5);">Our Work</h1>
+    <p style="color:rgba(255,255,255,0.9); max-width:560px; line-height:1.7; font-size:1.15rem; text-shadow:0 1px 4px rgba(0,0,0,0.4);">
+      Four interconnected programs that address the root causes of vulnerability for children and families in Kenya.
+    </p>
+  </div>
+</section>
+
+{{ with .Content }}
+<div style="max-width:720px; margin:0 auto; padding:3rem 1.5rem 0;">
+  <div class="gh-content">{{ . }}</div>
+</div>
+{{ end }}
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+  <div style="display:flex; flex-direction:column; gap:2.5rem;">
+
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <img src="{{ $shelterLogoSrc }}" alt="Shelter Works" style="height:40px; width:auto;" />
+          <span style="background:var(--kw-primary-pale); color:var(--kw-primary); font-size:0.78rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:999px; text-transform:uppercase; letter-spacing:0.1em;">Shelter Works</span>
+        </div>
+        <h2 style="font-size:1.875rem; color:var(--kw-dark); margin-bottom:0.75rem;">Children belong in families.</h2>
+        <p style="color:var(--kw-text); line-height:1.75; margin-bottom:1.5rem;">We work upstream: outreach and feeding programs that keep families together and stop crises before they start. When a child does need refuge, a safe home is waiting.</p>
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--kw-accent);">61,619</div>
+          <div style="font-size:0.8rem; color:var(--kw-text-muted); font-weight:500;">Shelter nights (2025)</div>
+        </div>
+        <a href="{{ "/our-work/shelter-works/" | relURL }}" class="btn-secondary">Learn about Shelter Works</a>
+      </div>
+      <div style="background:var(--kw-primary-pale); border-radius:1rem; padding:2.5rem; text-align:center;">
+        <img src="{{ $shelterLogoSrc }}" alt="Shelter Works" style="height:80px; width:auto; margin:0 auto;" />
+        <p style="color:var(--kw-primary); font-style:italic; margin-top:1rem; font-size:1rem; line-height:1.6;">Shelter is a bridge, not a destination.</p>
+      </div>
+    </div>
+
+    <hr style="border:none; border-top:1px solid var(--kw-border);">
+
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div style="order:2;" class="md:order-1">
+        <div style="background:var(--kw-education-pale); border-radius:1rem; padding:2.5rem; text-align:center;">
+          <img src="{{ $edLogoSrc }}" alt="Education Works" style="height:80px; width:auto; margin:0 auto;" />
+          <p style="color:var(--kw-education); font-style:italic; margin-top:1rem; font-size:1rem; line-height:1.6;">Education is the most powerful tool we have to break the cycle of poverty.</p>
+        </div>
+      </div>
+      <div style="order:1;" class="md:order-2">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <img src="{{ $edLogoSrc }}" alt="Education Works" style="height:40px; width:auto;" />
+          <span style="background:var(--kw-education-pale); color:var(--kw-education); font-size:0.78rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:999px; text-transform:uppercase; letter-spacing:0.1em;">Education Works</span>
+        </div>
+        <h2 style="font-size:1.875rem; color:var(--kw-dark); margin-bottom:0.75rem;">From classrooms to careers.</h2>
+        <p style="color:var(--kw-text); line-height:1.75; margin-bottom:1.5rem;">Scholarships covering fees, uniforms, books, and mentorship for primary and secondary students — 1,011 sponsored in 2025.</p>
+        <div style="display:flex; gap:1.5rem; margin-bottom:1.5rem;">
+          <div><div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--kw-accent);">911</div><div style="font-size:0.8rem; color:var(--kw-text-muted);">Fully sponsored</div></div>
+          <div><div style="font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--kw-accent);">100</div><div style="font-size:0.8rem; color:var(--kw-text-muted);">Partially sponsored</div></div>
+        </div>
+        <a href="{{ "/our-work/education-works/" | relURL }}" class="btn-secondary" style="border-color:var(--kw-education); color:var(--kw-education);">Learn about Education Works</a>
+      </div>
+    </div>
+
+    <hr style="border:none; border-top:1px solid var(--kw-border);">
+
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <img src="{{ $mhhLogoSrc }}" alt="MHH Works" style="height:40px; width:auto;" />
+          <span style="background:var(--kw-mhh-pale); color:var(--kw-mhh); font-size:0.78rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:999px; text-transform:uppercase; letter-spacing:0.1em;">MHH Works</span>
+        </div>
+        <h2 style="font-size:1.875rem; color:var(--kw-dark); margin-bottom:0.75rem;">No girl should miss school for her period.</h2>
+        <p style="color:var(--kw-text); line-height:1.75; margin-bottom:1.5rem;">The Makini Pad program provides reusable menstrual pads and health education — keeping 33,000 girls in school and in dignity in 2025.</p>
+        <a href="{{ "/our-work/mhh-works/" | relURL }}" class="btn-secondary" style="border-color:var(--kw-mhh); color:var(--kw-mhh);">Learn about MHH Works</a>
+      </div>
+      <div style="background:var(--kw-mhh-pale); border-radius:1rem; padding:2.5rem; text-align:center;">
+        <img src="{{ $mhhLogoSrc }}" alt="MHH Works" style="height:80px; width:auto; margin:0 auto;" />
+        <p style="color:var(--kw-mhh); font-style:italic; margin-top:1rem; font-size:1rem; line-height:1.6;">When a girl stays in school, entire communities are transformed.</p>
+      </div>
+    </div>
+
+    <hr style="border:none; border-top:1px solid var(--kw-border);">
+
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div style="order:2;" class="md:order-1">
+        <div style="background:#FFF7ED; border-radius:1rem; padding:2.5rem; text-align:center;">
+          <img src="{{ $cwLogoSrc }}" alt="Community Works" style="height:80px; width:auto; margin:0 auto;" />
+          <p style="color:var(--kw-accent); font-style:italic; margin-top:1rem; font-size:1rem; line-height:1.6;">Lasting change requires communities to own their story and lead their future.</p>
+        </div>
+      </div>
+      <div style="order:1;" class="md:order-2">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <img src="{{ $cwLogoSrc }}" alt="Community Works" style="height:40px; width:auto;" />
+          <span style="background:#FFF7ED; color:var(--kw-accent); font-size:0.78rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:999px; text-transform:uppercase; letter-spacing:0.1em;">Community Works</span>
+        </div>
+        <h2 style="font-size:1.875rem; color:var(--kw-dark); margin-bottom:0.75rem;">Communities leading their own change.</h2>
+        <p style="color:var(--kw-text); line-height:1.75; margin-bottom:1.5rem;">Training 2,080 advocates and parents in 2025 to champion human rights and protect against FGM, child marriage, and gender-based violence.</p>
+        <a href="{{ "/our-work/community-works/" | relURL }}" class="btn-secondary" style="border-color:var(--kw-accent); color:var(--kw-accent);">Learn about Community Works</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{{/* ── UBUNTU INTRODUCTION ───────────────────────────────── */}}
+<div style="background:var(--kw-cream); padding:3rem 1.5rem;">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <h2 style="font-family:'Playfair Display',serif; font-size:2.25rem; color:var(--kw-dark); margin-bottom:1rem;">Ubuntu: I Am Because We Are</h2>
+      <p style="color:var(--kw-text); font-size:1.1rem; line-height:1.8; max-width:700px; margin:0 auto;">
+        The African philosophy of <em>Ubuntu</em> teaches us that our humanity is bound together — when one thrives, we all thrive. Our four pillars work as one interconnected system, each strengthening the others to create lasting change.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8" style="margin-bottom:2.5rem;">
+      <div style="background:white; padding:2rem; border-radius:1rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:4px solid var(--kw-primary);">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+          <div style="background:var(--kw-primary-pale); padding:0.75rem; border-radius:0.5rem; display:flex; align-items:center; justify-content:center;"><img src="{{ $shelterLogoSrc }}" alt="Shelter Works" style="height:28px; width:auto;" /></div>
+          <h3 style="font-size:1.25rem; color:var(--kw-dark); margin:0;">Security - Shelter Works</h3>
+        </div>
+        <p style="color:var(--kw-text); line-height:1.7; font-size:0.95rem; margin-bottom:0.75rem;">
+          We work upstream: outreach and feeding programs that keep families together and stop crises before they start. When a child does need refuge, a safe home is waiting.
+        </p>
+        <p style="color:var(--kw-primary); font-weight:600; font-size:0.875rem;">
+          → Shelter Works provides immediate safety and family strengthening
+        </p>
+      </div>
+
+      <div style="background:white; padding:2rem; border-radius:1rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:4px solid var(--kw-education);">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+          <div style="background:var(--kw-education-pale); padding:0.75rem; border-radius:0.5rem; display:flex; align-items:center; justify-content:center;"><img src="{{ $edLogoSrc }}" alt="Education Works" style="height:28px; width:auto;" /></div>
+          <h3 style="font-size:1.25rem; color:var(--kw-dark); margin:0;">Knowledge - Education Works</h3>
+        </div>
+        <p style="color:var(--kw-text); line-height:1.7; font-size:0.95rem; margin-bottom:0.75rem;">
+          Full student sponsorship, school infrastructure, and feeding programs. No child learns hungry, or in a classroom that's falling down. We fund the whole picture, not just the fees.
+        </p>
+        <p style="color:var(--kw-education); font-weight:600; font-size:0.875rem;">
+          → Education Works opens pathways from classrooms to careers
+        </p>
+      </div>
+
+      <div style="background:white; padding:2rem; border-radius:1rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:4px solid var(--kw-mhh);">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+          <div style="background:var(--kw-mhh-pale); padding:0.75rem; border-radius:0.5rem; display:flex; align-items:center; justify-content:center;"><img src="{{ $mhhLogoSrc }}" alt="MHH Works" style="height:28px; width:auto;" /></div>
+          <h3 style="font-size:1.25rem; color:var(--kw-dark); margin:0;">Equality - Community Works</h3>
+        </div>
+        <p style="color:var(--kw-text); line-height:1.7; font-size:0.95rem; margin-bottom:0.75rem;">
+          Human rights forums that train community members as advocates. They learn the law, they learn their rights, and they carry both home. The goal isn't a safe child in an unsafe place — it's a community that protects everyone in it.
+        </p>
+        <p style="color:var(--kw-mhh); font-weight:600; font-size:0.875rem;">
+          → MHH Works keeps girls in school with dignity and confidence
+        </p>
+      </div>
+
+      <div style="background:white; padding:2rem; border-radius:1rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-top:4px solid var(--kw-accent);">
+        <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+          <div style="background:#FFF7ED; padding:0.75rem; border-radius:0.5rem; display:flex; align-items:center; justify-content:center;"><img src="{{ $cwLogoSrc }}" alt="Community Works" style="height:28px; width:auto;" /></div>
+          <h3 style="font-size:1.25rem; color:var(--kw-dark); margin:0;">Empowerment - MHH Works</h3>
+        </div>
+        <p style="color:var(--kw-text); line-height:1.7; font-size:0.95rem; margin-bottom:0.75rem;">
+          Period poverty pulls girls out of class every month. We provide reusable Makini pads, menstrual panties, and health education so girls stay in school — and we teach boys too, through Boxes for Boys. Dignity is something a whole generation learns together.
+        </p>
+        <p style="color:var(--kw-accent); font-weight:600; font-size:0.875rem;">
+          → Community Works trains advocates to champion rights and justice
+        </p>
+      </div>
+    </div>
+
+    <div style="background:var(--kw-primary); padding:2rem; border-radius:1rem; text-align:center;">
+      <p style="color:#8FBBF5; font-size:0.875rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.75rem;">Our Approach</p>
+      <p style="color:white; font-size:1.15rem; line-height:1.7; font-style:italic;">
+        "When we lift one child, we strengthen a family. When we strengthen a family, we transform a community. When communities thrive together, we change the future."
+      </p>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--kw-primary); padding:3rem 1.5rem; text-align:center;">
+  <h3 style="color:white; font-size:1.5rem; margin-bottom:0.75rem;">Aligned with UN Sustainable Development Goals</h3>
+  <p style="color:rgba(255,255,255,0.8); max-width:520px; margin:0 auto 1.5rem; line-height:1.7;">
+    Our four program pillars directly advance the UN SDGs on food security, health, education, gender equality, and poverty.
+  </p>
+  <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-white">Support Our Work</a>
+</div>
+
+{{ end }}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {{- if .IsHome -}}{{ .Site.Title }}
+    {{- else -}}{{ .Title }} | {{ .Site.Title }}
+    {{- end -}}
+  </title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  {{ with .Params.image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ "/favicon.png" | relURL }}">
+  <link rel="shortcut icon" href="{{ "/favicon.png" | relURL }}">
+  <link rel="stylesheet" href="{{ "/css/screen.css" | relURL }}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { 'kw-primary': 'var(--kw-primary)', 'kw-accent': 'var(--kw-accent)', 'kw-cream': 'var(--kw-cream)' } } }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col" style="background-color:var(--kw-cream);">
+  {{ partial "site-header.html" . }}
+  <main class="flex-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "site-footer.html" . }}
+  {{ partial "search-modal.html" . }}
+  <script>
+    const btn = document.getElementById('mobile-nav-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('open'));
+    window.KW_SEARCH_INDEX = "{{ "/index.json" | relURL }}";
+  </script>
+  {{ with resources.Get "js/fuse.basic.min.js" }}
+    <script src="{{ (. | minify | fingerprint).RelPermalink }}" defer></script>
+  {{ end }}
+  {{ with resources.Get "js/search.js" }}
+    <script src="{{ (. | minify | fingerprint).RelPermalink }}" defer></script>
+  {{ end }}
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>

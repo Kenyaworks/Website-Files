@@ -1,0 +1,115 @@
+{{ define "main" }}
+
+{{ $heroImgSrc := "" }}
+{{ with .Params.image }}
+  {{ with resources.Get (strings.TrimPrefix "/" .) }}
+    {{ $heroImgSrc = (.Resize "1440x webp").RelPermalink }}
+  {{ end }}
+{{ end }}
+
+<article>
+  {{ if $heroImgSrc }}
+  <div style="background:var(--kw-primary); position:relative; max-height:480px; overflow:hidden;">
+    <img src="{{ $heroImgSrc }}" alt="{{ .Title }}" style="width:100%; max-height:480px; object-fit:cover; object-position:center 20%; opacity:0.75;">
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(20,74,43,0.85), transparent);"></div>
+    <div style="position:absolute; bottom:0; left:0; right:0; padding:3rem 1.5rem; max-width:800px; margin:0 auto;">
+      {{ with .Params.tags }}
+      <div style="margin-bottom:0.75rem;">
+        {{ range first 2 . }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill" style="background:rgba(255,255,255,0.15); color:white; margin-right:0.4rem;">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+      <h1 style="color:white; font-size:clamp(1.75rem,4vw,2.75rem); line-height:1.2;">{{ .Title }}</h1>
+      <p style="color:rgba(255,255,255,0.75); font-size:0.875rem; margin-top:0.75rem;">
+        {{ .Date.Format "January 2, 2006" }} &nbsp;·&nbsp; {{ .ReadingTime }} min read
+      </p>
+    </div>
+  </div>
+  {{ else }}
+  <div class="page-hero">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      {{ with .Params.tags }}
+      <div style="margin-bottom:0.75rem;">
+        {{ range first 2 . }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill" style="background:rgba(255,255,255,0.15); color:white; margin-right:0.4rem;">{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+      <h1>{{ .Title }}</h1>
+      <p style="color:rgba(255,255,255,0.7); font-size:0.875rem; margin-top:0.75rem;">
+        {{ .Date.Format "January 2, 2006" }} &nbsp;·&nbsp; {{ .ReadingTime }} min read
+      </p>
+    </div>
+  </div>
+  {{ end }}
+
+  <div style="max-width:720px; margin:0 auto; padding:3rem 1.5rem;">
+    <div class="gh-content">
+      {{ if $heroImgSrc }}
+        {{ $inlineImg := printf `<figure style="margin:2rem 0 2.5rem; border-radius:0.75rem; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08);"><img src="%s" alt="%s" style="width:100%%; display:block;"></figure>` $heroImgSrc .Title }}
+        {{ $parts := split .Content "</p>" }}
+        {{ $lastIdx := sub (len $parts) 1 }}
+        {{ $wordCount := 0 }}
+        {{ $inserted := false }}
+        {{ $out := "" }}
+        {{ range $i, $p := $parts }}
+          {{ if eq $i $lastIdx }}
+            {{ $out = print $out $p }}
+          {{ else }}
+            {{ $para := print $p "</p>" }}
+            {{ $out = print $out $para }}
+            {{ if not $inserted }}
+              {{ $wordCount = add $wordCount (len (findRE "\\S+" (plainify $para))) }}
+              {{ if ge $wordCount 100 }}
+                {{ $out = print $out $inlineImg }}
+                {{ $inserted = true }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ if not $inserted }}
+          {{ $out = print $out $inlineImg }}
+        {{ end }}
+        {{ $out | safeHTML }}
+      {{ else }}
+        {{ .Content }}
+      {{ end }}
+    </div>
+    {{ with .Params.tags }}
+    <div style="margin-top:3rem; padding-top:2rem; border-top:1px solid var(--kw-border);">
+      <span style="font-size:0.8rem; color:var(--kw-text-subtle); font-weight:500; text-transform:uppercase; letter-spacing:0.1em;">Filed under</span>
+      <div style="margin-top:0.5rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        {{ range . }}
+        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill">{{ . }}</a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  <div style="background:var(--kw-primary); padding:3rem 1.5rem; text-align:center;">
+    <p style="color:rgba(255,255,255,0.85); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:600; margin-bottom:0.5rem;">Make an impact</p>
+    <h2 style="color:white; font-size:1.75rem; margin-bottom:1.25rem;">Stories like this one depend on your support.</h2>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-primary">Donate Now</a>
+      <a href="{{ "/get-involved/#sponsor" | relURL }}" class="btn-white">Sponsor a Student</a>
+    </div>
+  </div>
+
+  {{ $related := first 3 (where (where .Site.RegularPages "Section" "stories") "Permalink" "ne" .Permalink) }}
+  {{ if $related }}
+  <div style="background:var(--kw-cream); padding:4rem 1.5rem;">
+    <div style="max-width:1152px; margin:0 auto;">
+      <h3 style="font-size:1.5rem; color:var(--kw-dark); margin-bottom:2rem;">More Stories</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {{ range $related }}
+          {{ partial "post-card.html" . }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</article>
+
+{{ end }}

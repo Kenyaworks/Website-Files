@@ -1,0 +1,67 @@
+{{ define "main" }}
+
+{{/* ── Process hero image ─────────── */}}
+{{ $heroSrc := "" }}
+{{ with resources.Get "images/stories-hero.jpg" }}
+  {{ $heroSrc = (.Resize "1920x webp").RelPermalink }}
+{{ end }}
+
+{{/* ── HERO ─────────────────────────────────────────────── */}}
+<section style="{{ printf "background:url('%s'); background-size:cover; background-position:center -200px; min-height:580px; position:relative;" $heroSrc | safeCSS }}" class="flex items-end">
+  <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4) 100%);"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 pb-20 w-full" style="position:relative; z-index:1;">
+    <div style="max-width:700px;">
+      <p style="color:#8FBBF5; font-size:clamp(1.25rem,2.6vw,2rem); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:1rem; text-shadow:0 2px 8px rgba(0,0,0,0.5);">Our Stories</p>
+      <h1 style="font-family:'Playfair Display',serif; color:white; font-size:clamp(2.25rem,5vw,3.5rem); line-height:1.15; margin-bottom:1.25rem;">
+        The people, moments, and milestones behind our work
+      </h1>
+      <p style="color:rgba(255,255,255,0.95); font-size:1.15rem; line-height:1.7; margin-bottom:2rem;">
+        Real stories from Kenya — showing the impact of partnership, dignity, and hope in action.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+        <a href="{{ "/get-involved/#donate" | relURL }}" class="btn-primary">Support Our Work</a>
+        <a href="{{ "/our-work/" | relURL }}" class="btn-white">Explore Programs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="background:white; border-bottom:1px solid var(--kw-border);">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+    <a href="{{ "/stories/" | relURL }}" class="tag-pill">All</a>
+    <a href="{{ "/tags/shelter-works/" | relURL }}" class="tag-pill">Shelter Works</a>
+    <a href="{{ "/tags/education-works/" | relURL }}" class="tag-pill">Education Works</a>
+    <a href="{{ "/tags/mhh-works/" | relURL }}" class="tag-pill">MHH Works</a>
+    <a href="{{ "/tags/community-works/" | relURL }}" class="tag-pill">Community Works</a>
+    <a href="{{ "/tags/impact/" | relURL }}" class="tag-pill">Impact</a>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+  {{ if .Pages }}
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {{ range .Paginator.Pages }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+
+  {{ if gt .Paginator.TotalPages 1 }}
+  <div class="pagination">
+    {{ if .Paginator.HasPrev }}
+      <a href="{{ .Paginator.Prev.URL }}" class="btn-secondary" style="padding:0.5rem 1.25rem; font-size:0.875rem;">← Newer</a>
+    {{ end }}
+    <span style="color:var(--kw-text-muted); font-size:0.875rem; align-self:center;">
+      Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+    </span>
+    {{ if .Paginator.HasNext }}
+      <a href="{{ .Paginator.Next.URL }}" class="btn-secondary" style="padding:0.5rem 1.25rem; font-size:0.875rem;">Older →</a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ else }}
+  <p style="color:var(--kw-text-muted); text-align:center; padding:4rem 0;">No stories yet. Check back soon.</p>
+  {{ end }}
+</div>
+
+{{ end }}

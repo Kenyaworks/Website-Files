@@ -1,0 +1,17 @@
+<div id="kw-search-modal" class="kw-search-modal" role="dialog" aria-modal="true" aria-label="Search this site">
+  <div class="kw-search-panel">
+    <div class="kw-search-bar">
+      <svg class="kw-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search programs, challenges, and stories…" aria-label="Search query" autocomplete="off" spellcheck="false">
+      <button type="button" data-kw-search-close class="kw-search-close" aria-label="Close search">Esc</button>
+    </div>
+    <div class="kw-search-results"></div>
+    <div class="kw-search-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
+      <span><kbd>↵</kbd> to open</span>
+      <a href="{{ "/search/" | relURL }}">Full search page →</a>
+    </div>
+  </div>
+</div>

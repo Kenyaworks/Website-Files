@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+<div class="page-hero">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}
+    <p style="margin-top:0.75rem; max-width:500px;">{{ . }}</p>
+    {{ end }}
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+  {{ if .Content }}
+  <div class="gh-content" style="margin-bottom:3rem; max-width:720px;">{{ .Content }}</div>
+  {{ end }}
+
+  {{ if .Pages }}
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {{ range .Pages }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}

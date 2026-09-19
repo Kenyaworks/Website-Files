@@ -1,0 +1,84 @@
+{{ define "main" }}
+
+{{ $heroImgSrc := "" }}
+{{ with .Params.heroImage }}
+  {{ with resources.Get (strings.TrimPrefix "/" .) }}
+    {{ $heroImgSrc = (.Resize (printf "%dx webp" (cond (gt .Width 1920) 1920 .Width))).RelPermalink }}
+  {{ end }}
+{{ end }}
+{{ $heroPos := default "center" .Params.heroImagePosition }}
+
+<div class="page-hero"{{ if $heroImgSrc }} style="{{ printf "background:linear-gradient(to bottom, rgba(0,0,0,0.3) 0%%, rgba(0,0,0,0.6) 100%%), url('%s'); background-size:cover; background-position:%s;" $heroImgSrc $heroPos | safeCSS }}"{{ end }}>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <h1>About Kenya Works</h1>
+    <p style="margin-top:0.75rem; max-width:520px;">
+      A 501(c)(3) nonprofit dedicated to empowering vulnerable children and families in Kenya.
+    </p>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+
+  <div class="grid md:grid-cols-2 gap-12 items-center" style="margin-bottom:4rem;">
+    <div>
+      <h2 style="font-size:1.875rem; color:var(--kw-dark); margin-bottom:1rem;">Our Mission</h2>
+      <p style="color:var(--kw-text); line-height:1.75; margin-bottom:1rem;">
+        Kenya Works empowers vulnerable children and families in Kenya through holistic, dignity-centered care. We address the root causes of poverty — not just its symptoms — through security, empowerment, knowledge, and equality.
+      </p>
+      <blockquote style="border-left:4px solid var(--kw-accent); padding:1rem 1.5rem; background:var(--kw-primary-pale); border-radius:0 0.5rem 0.5rem 0; margin:1.5rem 0; font-style:italic; font-size:1.05rem; color:var(--kw-dark);">
+        "Poverty is a denial of choices and opportunity. It is a violation of human dignity."
+      </blockquote>
+    </div>
+    <div style="background:var(--kw-primary-pale); border-radius:1rem; padding:2.5rem;">
+      <h3 style="font-size:1.1rem; color:var(--kw-primary); margin-bottom:1.25rem;">Our Approach</h3>
+      <ul style="list-style:none; padding:0; margin:0;">
+        {{ range (slice (dict "letter" "S" "word" "Security" "desc" "Safe homes and physical safety as the foundation") (dict "letter" "E" "word" "Empowerment" "desc" "Building capacity for communities to lead their own change") (dict "letter" "K" "word" "Knowledge" "desc" "Education, health information, and skills that open doors") (dict "letter" "E" "word" "Equality" "desc" "Championing human rights for women, girls, and all children")) }}
+        <li style="display:flex; gap:0.75rem; align-items:flex-start; margin-bottom:1rem; font-size:0.925rem; color:var(--kw-text);">
+          <span style="color:var(--kw-accent); font-weight:700; font-size:1.1rem; min-width:1rem; margin-top:0.1rem;">{{ .letter }}</span>
+          <div><strong>{{ .word }}</strong> — {{ .desc }}</div>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+
+  {{ with .Content }}
+  <div class="gh-content" style="margin-bottom:4rem;">{{ . }}</div>
+  {{ end }}
+
+  <div style="background:var(--kw-primary); border-radius:1rem; padding:2.5rem; margin-bottom:4rem;">
+    <h3 style="color:white; font-size:1.375rem; margin-bottom:0.75rem;">Aligned with the UN Sustainable Development Goals</h3>
+    <p style="color:rgba(255,255,255,0.8); line-height:1.75; max-width:640px; margin-bottom:1.5rem;">
+Our programs directly advance the UN SDGs on zero hunger, good health, quality education, gender equality, reduced inequalities, and partnerships for the goals.
+    </p>
+    <a href="https://sdgs.un.org/" class="btn-white" target="_blank" rel="noopener" style="font-size:0.875rem;">Learn about the SDGs →</a>
+    <a href="/stories/kenya-works-the-united-nations-sustainable-development-goals/" class="btn-white" target="_blank" rel="noopener" style="font-size:0.875rem;">Read More about Kenya Works and UN Sustainability →</a>
+  </div>
+
+  <div>
+    <h2 style="font-size:1.75rem; color:var(--kw-dark); margin-bottom:1rem;">Transparency &amp; Accountability</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div style="padding:1.5rem; background:white; border-radius:0.75rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">📄</div>
+        <h4 style="font-size:1rem; margin-bottom:0.35rem; color:var(--kw-dark);">Annual Reports</h4>
+        <p style="color:var(--kw-text-muted); font-size:0.875rem; margin-bottom:1rem;">Full program impact and financial summaries.</p>
+        <a href="{{ "/annual-reports/" | relURL }}" style="color:var(--kw-primary); font-weight:500; font-size:0.875rem; text-decoration:none;">View Reports →</a>
+      </div>
+      <div style="padding:1.5rem; background:white; border-radius:0.75rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">⭐</div>
+        <h4 style="font-size:1rem; margin-bottom:0.35rem; color:var(--kw-dark);">Charity Rating</h4>
+        <p style="color:var(--kw-text-muted); font-size:0.875rem; margin-bottom:1rem;">Recognized for accountability and transparency.</p>
+        <a href="https://www.charitynavigator.org" style="color:var(--kw-primary); font-weight:500; font-size:0.875rem; text-decoration:none;" target="_blank" rel="noopener">See our rating →</a>
+      </div>
+      <div style="padding:1.5rem; background:white; border-radius:0.75rem; box-shadow:0 2px 8px rgba(0,0,0,0.06); text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">📋</div>
+        <h4 style="font-size:1rem; margin-bottom:0.35rem; color:var(--kw-dark);">EIN: {{ .Site.Params.ein }}</h4>
+        <p style="color:var(--kw-text-muted); font-size:0.875rem; margin-bottom:1rem;">501(c)(3) registered nonprofit. Donations are tax-deductible.</p>
+        <a href="{{ "/contact/" | relURL }}" style="color:var(--kw-primary); font-weight:500; font-size:0.875rem; text-decoration:none;">Contact us →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{ end }}
