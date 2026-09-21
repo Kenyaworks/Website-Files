@@ -1,4 +1,4 @@
-baseURL = "https://www.kenyaworks.org/"
+baseURL = "https://kenyaworks.org"
 locale = "en-us"
 title = "Kenya Works"
 paginate = 9
