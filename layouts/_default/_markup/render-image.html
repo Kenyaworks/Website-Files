@@ -1,0 +1,9 @@
+{{- /* Resolve Markdown images against assets/ so they get resized to WebP like
+       the images used in layouts. Falls back to the raw path (e.g. static/). */ -}}
+{{- $src := .Destination -}}
+{{- with resources.Get (strings.TrimPrefix "/" $src) -}}
+  {{- $src = (.Resize "900x webp").RelPermalink -}}
+{{- else -}}
+  {{- $src = $src | strings.TrimPrefix "/" | relURL -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy" style="display:block; width:100%; max-width:720px; height:auto; margin:2rem auto; border-radius:0.5rem; box-shadow:0 4px 24px rgba(0,0,0,0.12);">
