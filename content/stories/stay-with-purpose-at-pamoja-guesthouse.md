@@ -4,6 +4,7 @@ date: 2026-05-28
 tags: ["community-works"]
 summary: "Dear Friends of Kenya Works,"
 image: "images/stories/stay-with-purpose-at-pamoja-guesthouse.png"
+heroImage: "images/stories/pamoja-guesthouse-hero.png"
 ---
 
 Dear Friends of Kenya Works,
@@ -16,4 +17,4 @@ Pamoja Guesthouse offers comfortable accommodation for travelers, volunteers, mi
 
 **100% of Pamoja Guesthouse revenue supports Kenya Works programs**
 
-##
+[Download the Pamoja Guest House flyer](/documents/pamoja-guesthouse-flyer.pdf)
