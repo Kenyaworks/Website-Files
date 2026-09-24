@@ -18,3 +18,5 @@ Pamoja Guesthouse offers comfortable accommodation for travelers, volunteers, mi
 **100% of Pamoja Guesthouse revenue supports Kenya Works programs**
 
 [Download the Pamoja Guest House flyer](/documents/pamoja-guesthouse-flyer.pdf)
+
+![Pamoja Guesthouse flyer](images/stories/stay-with-purpose-at-pamoja-guesthouse.png)

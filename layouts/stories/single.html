@@ -46,7 +46,9 @@
 
   <div style="max-width:720px; margin:0 auto; padding:3rem 1.5rem;">
     <div class="gh-content">
-      {{ if $heroImgSrc }}
+      {{/* Repeat the banner inside the article, unless the story sets its own
+           heroImage and supplies body images of its own. */}}
+      {{ if and $heroImgSrc (not .Params.heroImage) }}
         {{ $inlineImg := printf `<figure style="margin:2rem 0 2.5rem; border-radius:0.75rem; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08);"><img src="%s" alt="%s" style="width:100%%; display:block;"></figure>` $heroImgSrc .Title }}
         {{ $parts := split .Content "</p>" }}
         {{ $lastIdx := sub (len $parts) 1 }}
