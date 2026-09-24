@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 {{ $heroImgSrc := "" }}
-{{ with .Params.image }}
+{{ with (default .Params.image .Params.heroImage) }}
   {{ with resources.Get (strings.TrimPrefix "/" .) }}
     {{ $heroImgSrc = (.Resize "1440x webp").RelPermalink }}
   {{ end }}
