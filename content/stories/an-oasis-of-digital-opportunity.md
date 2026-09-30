@@ -3,7 +3,7 @@ title: "An Oasis of Digital Opportunity"
 date: 2026-09-30
 tags: ["education-works"]
 summary: "How the Kenya Works computer lab opens doors for children, scholars, and community members."
-image: "image: "images/stories/an-oasis-of-digital-opportunity.jpeg""
+image:   "images/stories/an-oasis-of-digital-opportunity.jpeg"
 ---
 
 When a class from a nearby school arrives at Kenya Works, there is excitement. Students gather around the computers, eager for the chance to learn, explore, and try something new.
