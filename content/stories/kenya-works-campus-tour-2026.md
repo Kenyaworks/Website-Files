@@ -1,6 +1,6 @@
 ---
 title: "Kenya Works Campus Tour - 2026"
-date: 2026-08-10
+date: 2026-07-27
 tags: ["education-works", "shelter-works", "mhh-works", "community-works"]
 summary: "Take a video tour of the Kenya Works campus and see the spaces where our team and community meet, learn, plan, and take action together."
 image: "images/stories/kenya-works-campus-tour-2026.jpg"
