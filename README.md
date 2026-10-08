@@ -86,12 +86,12 @@ hugo.toml            # Site config, menu, and params
 | Parameter | Description |
 |---|---|
 | `baseURL` | Production URL — change before deploying |
-| `params.donateURL` | Link to the Wix donation page |
-| `params.sponsorURL` | Link to the Wix student sponsorship page |
-| `params.fundraiseURL` | Link to the Wix fundraising page |
+| `params.donateURL` | GiveLively donation page |
+| `params.sponsorURL` | Destination for the Sponsor a Student buttons (GiveLively) |
+| `params.fundraiseURL` | GiveLively peer-to-peer fundraiser form |
 | `params.ein` | IRS EIN (shown in footer) |
-| `params.paypalButtonId` | PayPal donation button ID — replace placeholder |
-| `params.giveLivelySlug` | Give Lively campaign slug — replace placeholder |
+| `params.paypalButtonId` | PayPal `hosted_button_id`. Leave empty to hide the PayPal and Apple Pay panels |
+| `params.giveLivelySlug` | Give Lively org slug (`kenyaworks-org`); empty omits the embedded widget |
 | `params.mpesaPaybill` | M-Pesa paybill number |
 | `params.mpesaAccount` | M-Pesa account format string |
 | `params.mailingAddress` | US mailing address (footer) |

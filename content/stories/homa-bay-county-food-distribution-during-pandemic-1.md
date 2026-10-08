@@ -16,4 +16,4 @@ Hunger is a real issue among these challenges for students who would normally re
 
 Since schools closed, Kenya Works has held two food distributions, bringing nutrition and hope to our scholars and their families. They are now happy and busy with their personal studies, hoping the pandemic will end soon and they can get back to pursuing their dreams of an education. Their smiles and voices send a big thank you to Kenya Works!
 
-May God bless Kenya Works and all its donors! Please go to https://www.kenyaworks.org/donate to support further food distributions to our scholars and their families.
+May God bless Kenya Works and all its donors! Please go to [our donate page](/get-involved/#donate) to support further food distributions to our scholars and their families.
