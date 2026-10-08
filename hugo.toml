@@ -11,14 +11,20 @@ paginate = 9
 
 [params]
   description = "Empowering vulnerable children and families in Kenya through shelter, education, menstrual health, and community advocacy."
-  donateURL   = "https://www.kenyaworks.org/donate"
-  sponsorURL  = "https://www.kenyaworks.org/sponsor"
-  fundraiseURL = "https://www.kenyaworks.org/fundraise"
+  # Donation flows are hosted by GiveLively (org slug: kenyaworks-org).
+  # These were previously absolute kenyaworks.org URLs served by the old Wix
+  # site; after the DNS cutover to GitHub Pages they 404 against this site.
+  donateURL   = "https://secure.givelively.org/donate/kenyaworks-org"
+  sponsorURL  = "https://secure.givelively.org/donate/kenyaworks-org"
+  fundraiseURL = "https://secure.givelively.org/donate/kenyaworks-org/child-not-bride-endchildmarriage/fundraisers/new"
   ein          = "05-0623727"
-  paypalButtonId = "REPLACE_WITH_PAYPAL_BUTTON_ID"
+  # Set to the hosted_button_id from paypal.com -> Tools -> PayPal Buttons ->
+  # Donate Button. While empty, the PayPal and Apple Pay panels are hidden
+  # rather than rendering an empty box.
+  paypalButtonId = ""
   mpesaPaybill   = "400222"
   mpesaAccount   = "1148226#(Name of Donation Made)"
-  giveLivelySlug = "REPLACE_WITH_GIVELIVELY_SLUG"
+  giveLivelySlug = "kenyaworks-org"
   mailingAddress = "PO Box 1572, Appleton, WI 54912"
 
 [menu]

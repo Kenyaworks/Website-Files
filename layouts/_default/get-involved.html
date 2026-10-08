@@ -37,7 +37,9 @@
     {{/* ── Payment methods ── */}}
     <div style="display:flex; flex-direction:column; gap:1rem;">
 
-      {{/* PayPal + Apple Pay */}}
+      {{/* PayPal + Apple Pay — hidden until params.paypalButtonId is set,
+           otherwise the hosted button renders an empty box. */}}
+      {{ with .Site.Params.paypalButtonId }}
       <div style="background:white; border-radius:1rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); overflow:hidden;">
         <button onclick="togglePanel('panel-paypal')"
           style="width:100%; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 1.75rem; background:none; border:none; cursor:pointer; text-align:left;">
@@ -91,6 +93,7 @@
           </div>
         </div>
       </div>
+      {{ end }}
 
       {{/* M-Pesa */}}
       <div style="background:white; border-radius:1rem; box-shadow:0 2px 12px rgba(0,0,0,0.07); overflow:hidden;">
@@ -290,27 +293,38 @@
 {{ end }}
 
 {{ define "scripts" }}
-{{/* PayPal Donate SDK — replace REPLACE_WITH_PAYPAL_BUTTON_ID with your hosted_button_id
-     Get it at: paypal.com → Tools → PayPal Buttons → Donate Button */}}
-{{/* GiveLively embed script — loads only when panel is opened */}}
+{{/* Accordion toggle is defined first and on its own so that a failure in any
+     third-party payment SDK below cannot leave the Donate panels unopenable. */}}
 <script>
-  document.getElementById('panel-givelively').addEventListener('gl:loaded', function() {}, false);
-</script>
-<script src="https://secure.givelively.org/widgets/simple_donation/{{ .Site.Params.giveLivelySlug }}.js" async></script>
-<script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-<script>
-  PayPal.Donation.Button({
-    env: 'production',
-    hosted_button_id: '{{ .Site.Params.paypalButtonId | default "REPLACE_WITH_PAYPAL_BUTTON_ID" }}',
-    style: { label: 'donate', height: 40, color: 'blue', shape: 'rect' }
-  }).render('#paypal-donate-btn-container');
-
   function togglePanel(id) {
     const panel = document.getElementById(id);
     const icon  = document.getElementById(id + '-icon');
-    const open  = panel.style.display === 'none';
+    if (!panel) return;
+    const open = panel.style.display === 'none';
     panel.style.display = open ? 'block' : 'none';
-    icon.textContent    = open ? '－' : '＋';
+    if (icon) icon.textContent = open ? '\uFF0D' : '\uFF0B';
   }
 </script>
+
+{{/* GiveLively embed — slug comes from params.giveLivelySlug */}}
+{{ with .Site.Params.giveLivelySlug }}
+<script src="https://secure.givelively.org/widgets/simple_donation/{{ . }}.js" async></script>
+{{ end }}
+
+{{/* PayPal Donate SDK — only loaded when a real hosted_button_id is configured.
+     Get it at: paypal.com -> Tools -> PayPal Buttons -> Donate Button */}}
+{{ with .Site.Params.paypalButtonId }}
+<script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+<script>
+  try {
+    PayPal.Donation.Button({
+      env: 'production',
+      hosted_button_id: {{ . }},
+      style: { label: 'donate', height: 40, color: 'blue', shape: 'rect' }
+    }).render('#paypal-donate-btn-container');
+  } catch (e) {
+    console.error('PayPal donate button failed to render', e);
+  }
+</script>
+{{ end }}
 {{ end }}
