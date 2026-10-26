@@ -3,7 +3,7 @@ title: "A child herself when she sought safety. Today, a registered nurse."
 date: 2026-10-26
 tags: ["shelter-works"]
 summary: "Seven years after arriving at a shelter with her baby, Esther is caring for children in the place that welcomed them."
-image: "images/stories/esther-registered-nurse.jpg"
+image: "images/stories/esther-nurse-with-child.jpg"
 ---
 
 *Seven years after arriving at a shelter with her baby, Esther is caring for children in the place that welcomed them.*
