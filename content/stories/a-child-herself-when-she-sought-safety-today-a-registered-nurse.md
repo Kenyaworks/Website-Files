@@ -60,6 +60,5 @@ Your gift to Kenya Works helps provide that support.
 
 You can help a child find safety today—and the opportunity to learn, heal, and work toward a future of their own.
 
-Please give today.
 
 **[Give to Kenya Works](https://www.kenyaworks.org/get-involved/#donate)**
