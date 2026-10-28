@@ -25,10 +25,10 @@ Give a Child the Whole Circle of Support
 
 No child should have to give up her future for her family to survive.
 
-$12 gives a girl a Makini Pad Dignity Kit so she can stay in school with confidence.
-$60 a month keeps a child learning with school fees, meals, and mentorship.
-$350 gives a family of four daily meals for a year.
-$4,000 funds a four-day human-rights training for 65 parents, leaders, and neighbors.
+1. $12 gives a girl a Makini Pad Dignity Kit so she can stay in school with confidence.
+2. $60 a month keeps a child learning with school fees, meals, and mentorship.
+3. $350 gives a family of four daily meals for a year.
+4. $4,000 funds a four-day human-rights training for 65 parents, leaders, and neighbors.
 
 Give Now
 
