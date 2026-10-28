@@ -1,7 +1,7 @@
 ---
 title: "The Wedding That Never Happened"
 date: 2026-10-28
-url: "/dorothy/"
+url: "/the-wedding-that-never-happened/"
 tags: ["community-works"]
 summary: "A childhood protected. A future kept open. Dorothy's story, and her family's."
 image: "images/stories/the-wedding-that-never-happened.jpg"
