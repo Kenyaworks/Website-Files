@@ -1,0 +1,64 @@
+{{- $imgs := split (.Get "images") "," -}}
+{{- $total := len $imgs -}}
+{{- $id := printf "kwc-%d" .Ordinal -}}
+<div class="kwc" id="{{ $id }}" tabindex="0" aria-label="Brochure pages, use the arrow buttons to turn the page">
+  <div class="kwc-stage">
+    {{- range $i, $src := $imgs }}
+    <img class="kwc-slide{{ if eq $i 0 }} active{{ end }}" src="{{ trim $src " \n\t" }}" alt="{{ $.Get "alt" | default "Brochure" }}, page {{ add $i 1 }} of {{ $total }}">
+    {{- end }}
+  </div>
+  <div class="kwc-nav">
+    <button type="button" class="kwc-btn kwc-prev" aria-label="Previous page">&#8249; Previous</button>
+    <span class="kwc-count" aria-live="polite">1 / {{ $total }}</span>
+    <button type="button" class="kwc-btn kwc-next" aria-label="Next page">Next &#8250;</button>
+  </div>
+  <div class="kwc-dots">
+    {{- range $i, $src := $imgs }}<button type="button" class="kwc-dot{{ if eq $i 0 }} active{{ end }}" aria-label="Go to page {{ add $i 1 }}"></button>{{ end }}
+  </div>
+  {{- with .Get "pdf" }}
+  <p class="kwc-dl"><a href="{{ . }}" target="_blank" rel="noopener">Open or download the brochure (PDF)</a></p>
+  {{- end }}
+</div>
+<style>
+.kwc{max-width:560px;margin:2rem auto;text-align:center}
+.kwc-slide{display:none;margin:0 auto;max-width:100%;max-height:85vh;width:auto;height:auto;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.kwc-slide.active{display:block}
+.kwc-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem}
+.kwc-btn{background:#1b4a8a;color:#fff;border:0;border-radius:999px;padding:.55rem 1.25rem;font-size:1rem;font-weight:600;cursor:pointer}
+.kwc-btn:hover{background:#163b70}
+.kwc-count{font-weight:600}
+.kwc-dots{display:flex;justify-content:center;gap:.5rem;margin-top:.75rem}
+.kwc-dot{width:12px;height:12px;border-radius:50%;border:0;padding:0;background:#c5cbd6;cursor:pointer}
+.kwc-dot.active{background:#1b4a8a}
+.kwc-dl{margin-top:1rem}
+</style>
+<script>
+(function(){
+  var root=document.getElementById("{{ $id }}");
+  if(!root)return;
+  var slides=root.querySelectorAll(".kwc-slide"),dots=root.querySelectorAll(".kwc-dot"),count=root.querySelector(".kwc-count"),i=0;
+  function go(n){
+    i=(n+slides.length)%slides.length;
+    for(var k=0;k<slides.length;k++){
+      slides[k].classList.toggle("active",k===i);
+      dots[k].classList.toggle("active",k===i);
+    }
+    count.textContent=(i+1)+" / "+slides.length;
+  }
+  root.querySelector(".kwc-prev").addEventListener("click",function(){go(i-1)});
+  root.querySelector(".kwc-next").addEventListener("click",function(){go(i+1)});
+  for(var d=0;d<dots.length;d++){(function(k){dots[k].addEventListener("click",function(){go(k)})})(d)}
+  root.addEventListener("keydown",function(e){
+    if(e.key==="ArrowLeft")go(i-1);
+    if(e.key==="ArrowRight")go(i+1);
+  });
+  var x=null;
+  root.addEventListener("touchstart",function(e){x=e.touches[0].clientX},{passive:true});
+  root.addEventListener("touchend",function(e){
+    if(x===null)return;
+    var dx=e.changedTouches[0].clientX-x;
+    if(Math.abs(dx)>40)go(dx<0?i+1:i-1);
+    x=null;
+  });
+})();
+</script>
