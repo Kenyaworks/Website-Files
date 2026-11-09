@@ -1,5 +1,5 @@
 ---
-title: "Grade 10 Scholarship Application"
+title: "Grade 10 Sponsorship Application"
 layout: "apply"
 description: "Apply for a Kenya Works Education Works scholarship for Grade 10."
 heroImage: "images/hero-community.webp"
