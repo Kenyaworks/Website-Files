@@ -1,0 +1,86 @@
+{{- $to := .Get "to" -}}
+{{- $cc := .Get "cc" -}}
+{{- $subject := .Get "subject" | default "New scholarship application" -}}
+{{- $next := .Get "thanks" -}}
+<div class="kwf" id="kwf-apply">
+  <p class="kwf-sent" id="kwf-sent" hidden>Thank you. Your application has been sent to the Kenya Works Scholarship Program Office. We will contact you using the phone number you gave.</p>
+  <form id="kwf-form" action="https://formsubmit.co/{{ $to }}" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_cc" value="{{ $cc }}">
+    <input type="hidden" name="_subject" value="{{ $subject }}">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" id="kwf-next" value="{{ $next }}">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+    <h3>About the applicant</h3>
+    <label>Applicant's full name (as on the form) *
+      <input type="text" name="Applicant name" required autocomplete="off"></label>
+    <label>NEMIS number
+      <input type="text" name="NEMIS number" autocomplete="off"></label>
+    <label>KJSEA index number
+      <input type="text" name="KJSEA index number" autocomplete="off"></label>
+    <label>Primary / junior school attended
+      <input type="text" name="School attended" autocomplete="off"></label>
+
+    <h3>Parent or guardian (contact person)</h3>
+    <label>Name *
+      <input type="text" name="Contact person" required autocomplete="off"></label>
+    <label>Mobile number *
+      <input type="tel" name="Mobile number" required autocomplete="off"></label>
+    <label>Alternative number
+      <input type="tel" name="Alternative number" autocomplete="off"></label>
+    <label>Email (if you have one)
+      <input type="email" name="email" autocomplete="off"></label>
+    <label>County *
+      <input type="text" name="County" required autocomplete="off"></label>
+    <label>Sub-county and village / nearest church, school or shop
+      <input type="text" name="Location" autocomplete="off"></label>
+
+    <h3>Upload your completed form</h3>
+    <p class="kwf-help">Upload a clear scan or photo of the <strong>whole completed form</strong>, with the signatures and official stamps. You can also add supporting documents (for example a fee structure, or a death certificate or chief's letter). Files must total <strong>9 MB or less</strong>.</p>
+    <label>Completed, signed and stamped form *
+      <input type="file" name="Completed form" id="kwf-main" accept=".pdf,.jpg,.jpeg,.png" required></label>
+    <label>Supporting documents (optional, you can choose several)
+      <input type="file" name="Supporting documents" id="kwf-extra" accept=".pdf,.jpg,.jpeg,.png" multiple></label>
+    <p class="kwf-error" id="kwf-error" role="alert" hidden></p>
+
+    <label class="kwf-check">
+      <input type="checkbox" name="Confirmation" value="Confirmed" required>
+      <span>I confirm that the information given is true, and I agree that Kenya Works may use it to assess this application. *</span></label>
+
+    <button type="submit" class="kwf-submit">Send application</button>
+  </form>
+</div>
+<style>
+.kwf{max-width:640px;margin:2rem auto}
+.kwf h3{margin:1.75rem 0 .5rem}
+.kwf label{display:block;font-weight:600;margin:.9rem 0}
+.kwf input[type=text],.kwf input[type=tel],.kwf input[type=email],.kwf input[type=file]{display:block;width:100%;box-sizing:border-box;margin-top:.35rem;padding:.65rem .75rem;border:1px solid #b9c0cc;border-radius:8px;font:inherit;font-weight:400;background:#fff}
+.kwf-help{font-size:.95rem}
+.kwf-check{display:flex !important;gap:.6rem;align-items:flex-start;font-weight:400 !important}
+.kwf-check input{margin-top:.3rem}
+.kwf-submit{display:block;margin:1.75rem auto 0;background:#1b4a8a;color:#fff;border:0;border-radius:999px;padding:.85rem 2.5rem;font-size:1.1rem;font-weight:700;cursor:pointer}
+.kwf-submit[disabled]{opacity:.6;cursor:wait}
+.kwf-error{color:#b00020;font-weight:600}
+.kwf-sent{background:#e8f3ea;border:1px solid #9cc7a4;border-radius:8px;padding:1rem}
+</style>
+<script>
+(function(){
+  var form=document.getElementById("kwf-form"),sent=document.getElementById("kwf-sent");
+  if(!form)return;
+  var next=document.getElementById("kwf-next");
+  if(!next.value){next.value=location.origin+location.pathname+"?sent=1#kwf-apply"}
+  if(/[?&]sent=1/.test(location.search)){sent.hidden=false;form.hidden=true;sent.scrollIntoView()}
+  var LIMIT=9*1024*1024,err=document.getElementById("kwf-error");
+  form.addEventListener("submit",function(e){
+    var total=0,files=form.querySelectorAll("input[type=file]");
+    for(var i=0;i<files.length;i++){for(var j=0;j<files[i].files.length;j++){total+=files[i].files[j].size}}
+    if(total>LIMIT){
+      e.preventDefault();
+      err.textContent="Your files are "+(total/1048576).toFixed(1)+" MB in total. Please keep them under 9 MB: scan as PDF, or take the photos at a lower quality.";
+      err.hidden=false;err.scrollIntoView({block:"center"});return;
+    }
+    err.hidden=true;
+    var b=form.querySelector(".kwf-submit");b.disabled=true;b.textContent="Sending, please wait...";
+  });
+})();
+</script>
