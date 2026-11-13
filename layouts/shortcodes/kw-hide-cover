@@ -1,0 +1,4 @@
+<style>
+img[src*="{{ .Get 0 }}"]{display:none !important}
+div:has(> img[src*="{{ .Get 0 }}"]:only-child),figure:has(> img[src*="{{ .Get 0 }}"]:only-child){display:none !important}
+</style>
