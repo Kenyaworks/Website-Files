@@ -16,6 +16,8 @@ In 2025, you helped make the power of “we” real for children and families in
 
 Please take a moment to watch this short video highlighting what we’ve accomplished together and where communities are leading us in 2026.
 
+   {{< youtube 1eO6aTsMwTM >}}
+
 Thank you for being part of this “WE.”
 
 With gratitude,
