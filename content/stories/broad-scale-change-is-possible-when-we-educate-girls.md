@@ -6,6 +6,8 @@ summary: "We know educating one girl changes the world in ways big and small. So
 image: "images/stories/broad-scale-change-is-possible-when-we-educate-girls.jpg"
 ---
 
+   {{< kw-hide-cover broad-scale-change-is-possible-when-we-educate-girls >}}
+
 We know educating one girl changes the world in ways big and small. So, what happens when we educate groups of 50 girls?
 
 The change is powerful! And it has begun.
