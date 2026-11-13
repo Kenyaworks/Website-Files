@@ -6,6 +6,8 @@ summary: "Thank you for an amazing 2025!"
 image: "images/stories/the-power-of-we-in-2025.jpg"
 ---
 
+   {{< kw-hide-cover the-power-of-we-in-2025 >}}
+
 Thank you for an amazing 2025!
 
 We look forward to another impactful year together in 2026.
