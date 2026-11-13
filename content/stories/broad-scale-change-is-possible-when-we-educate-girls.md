@@ -20,6 +20,8 @@ Until now.
 
 Watch the video to hear from Hope, one of our new students!
 
+   {{< youtube 8GnXM2ty0C0 >}}
+
 ## **Parent** **Training for Sustainable Change**
 
 The parents of each of our 100 students are also part of the program. This month, parent workshops were held to equip families with the knowledge and skills necessary to safeguard their daughters from harmful practices such as Female Genital Mutilation (FGM), forced marriages and teenage pregnancies, while supporting the girls’ academic goals.
