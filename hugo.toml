@@ -54,7 +54,7 @@ paginate = 9
     parent = "our-work"
 
   [[menu.main]]
-    name   = "MHH Works"
+    name   = "Hygiene Works"
     url    = "/our-work/mhh-works/"
     weight = 3
     parent = "our-work"
