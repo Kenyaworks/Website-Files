@@ -5,7 +5,7 @@ The public website for **Kenya Works**, a rights-based nonprofit partnering with
 | Pillar | Focus |
 |---|---|
 | **Shelter Works** | Safe refuge for children in crisis; family reunification; women's empowerment |
-| **MHH Works** | Menstrual health education; Makini reusable pads; Boxers for Boys |
+| **Hygiene Works** | Menstrual health education; Makini reusable pads; Boxers for Boys |
 | **Education Works** | Student sponsorships; school feeding; school infrastructure |
 | **Community Works** | Human rights training; child protection advocacy |
 
@@ -112,7 +112,7 @@ The `[menu.main]` section controls top-level navigation and the **About** dropdo
    ---
    title: "Post title"
    date: 2026-01-15
-   tags: ["education-works"]          # one or more: shelter-works, education-works, mhh-works, community-works
+   tags: ["education-works"]          # one or more: shelter-works, education-works, mhh-works (Hygiene Works), community-works
    summary: "One-sentence teaser shown on the listing card."
    image: "/images/stories/my-post-title.jpg"
    ---

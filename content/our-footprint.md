@@ -13,7 +13,7 @@ heroImage: "images/donkey.jpg"
   <div style="width: 195px; flex-shrink: 0; padding-top: 0.25rem;">
     <p style="font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 0.75rem;">Map Legend</p>
     <div style="display: flex; flex-direction: column; gap: 0.65rem;">
-      <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #0097A7; flex-shrink: 0;"></span><span style="font-size: 0.85rem; line-height: 1.3;">MHH Works</span></div>
+      <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #0097A7; flex-shrink: 0;"></span><span style="font-size: 0.85rem; line-height: 1.3;">Hygiene Works</span></div>
       <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #0288D1; flex-shrink: 0;"></span><span style="font-size: 0.85rem; line-height: 1.3;">Shelter Works</span></div>
       <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #1A237E; flex-shrink: 0;"></span><span style="font-size: 0.85rem; line-height: 1.3;">Education Works</span></div>
       <div style="display: flex; align-items: center; gap: 0.6rem;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #817717; flex-shrink: 0;"></span><span style="font-size: 0.85rem; line-height: 1.3;">Community Workshops</span></div>

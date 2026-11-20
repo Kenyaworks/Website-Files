@@ -26,10 +26,10 @@ quotes:
 footer:
   headline: "Help keep girls in school every day of the month."
   buttons:
-    - label: "Support MHH Works"
+    - label: "Support Hygiene Works"
       url: "/get-involved/#donate"
       class: "btn-white"
-    - label: "Learn About MHH Works"
+    - label: "Learn About Hygiene Works"
       url: "/our-work/mhh-works/"
       class: "btn-white"
       style: "background:white; color:var(--kw-mhh);"
@@ -83,7 +83,7 @@ Period poverty is solvable. The interventions that work combine products, educat
 
 ## How Kenya Works Responds
 
-Kenya Works's MHH Works program addresses period poverty directly and comprehensively. Through the Makini Pad program, we:
+Kenya Works's Hygiene Works program addresses period poverty directly and comprehensively. Through the Makini Pad program, we:
 
 - Distribute reusable Makini Pad kits and period panties to girls in schools across Kenya
 - Provide menstrual health education that is shame-free, accurate, and age-appropriate
@@ -93,4 +93,4 @@ Kenya Works's MHH Works program addresses period poverty directly and comprehens
 
 In 2025, 33,000 girls received Makini products. Each kit represents months of school attended, tests taken, and a future kept intact.
 
-[Learn more about MHH Works →](/our-work/mhh-works/)
+[Learn more about Hygiene Works →](/our-work/mhh-works/)

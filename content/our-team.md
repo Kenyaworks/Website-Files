@@ -45,7 +45,7 @@ team:
     title: "VICODEC Vocational Training"
     photo: "https://static.wixstatic.com/media/35cfa1_24075fc11dba456ba1956bc7215880b9~mv2.jpg/v1/crop/x_64,y_56,w_374,h_338/fill/w_300,h_300,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/fmusyoki.jpg"
 departments:
-  - name: "MHH Works Team"
+  - name: "Hygiene Works Team"
     photo: "images/mhh-team.jpeg"
   - name: "Miale ya Tumaini Team"
     photo: "images/miale-team.jpeg"

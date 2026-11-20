@@ -10,7 +10,7 @@ heroImage: "images/backpack.jpg"
 pillarName: "Challenges"
 tagSlug: "challenges"
 headline: "What does poverty look like in Kenya?"
-subheadline: "Kenya's economy is growing, but that growth has not reached everyone. Understanding the need is why Shelter, Education, MHH, and Community Works exist."
+subheadline: "Kenya's economy is growing, but that growth has not reached everyone. Understanding the need is why Shelter, Education, Hygiene, and Community Works exist."
 stats:
   - value: "$95B"
     label: "Kenya's GDP"
@@ -90,4 +90,4 @@ Women make up over 60% of Kenya's rural population, and absolute poverty among r
 - Disproportionate unpaid labor, including childcare and household work
 - Greater vulnerability to climate shocks and economic downturns
 
-This is the need our four programs — Shelter Works, Education Works, MHH Works, and Community Works — were built to address.
+This is the need our four programs — Shelter Works, Education Works, Hygiene Works, and Community Works — were built to address.

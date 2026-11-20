@@ -1,5 +1,5 @@
 ---
-title: "MHH Works"
+title: "Hygiene Works"
 description: "Combating period poverty through the Makini Pad program — keeping girls in school and in dignity."
 heroGradient: "linear-gradient(135deg,#6B1A6B,#3D0B3D)"
 accentColor: "var(--kw-mhh)"
@@ -13,7 +13,7 @@ contentImages:
     caption: "Makini Pad kits ready for distribution — locally made and reusable, each kit keeps a girl in school month after month."
   - image: "images/MakiniPanty.jpg"
     caption: "Makini period panties, sewn locally by our women-led production team."
-pillarName: "MHH Works"
+pillarName: "Hygiene Works"
 tagSlug: "mhh-works"
 headline: "No girl should miss school for her period. PERIOD."
 subheadline: "The Makini Pad program provides reusable menstrual pads and health education to keep girls in class and in control of their lives."
@@ -25,7 +25,7 @@ infobox:
   text: "Every month, girls across Kenya miss up to five days of school — not because they don't want to learn, but because they don't have what they need to manage their periods safely.
 Kenya Works Menstrual Health and Hygiene (MHH) is changing that. We provide adolescent girls with safe products, practical knowledge, and communities where they feel supported rather than ashamed. Because when a girl can manage her period with confidence, she stays in class, stays healthy, and stays on the path she deserves."
 cta:
-  title: "Support MHH Works"
+  title: "Support Hygiene Works"
   text: "Your gift puts Makini kits and life-changing education directly in the hands of girls who need them most—and brings boys and communities into the solution. Together, we can end period poverty in Kenya and ensure no girl loses her power because of her period."
   button: "Donate Now"
   url: "/get-involved/#donate"
@@ -35,11 +35,11 @@ quotes:
   - text: "Before, I would miss school every month. Now I can focus on my studies without shame or worry. I finally feel like my education matters as much as the boys'."
     attribution: "Atieno, Student at Kandiege Primary School"
 videoEmbed: "https://www.youtube.com/embed/AHhlvm6XCCA"
-videoTitle: "Makini Pad — MHH Works"
+videoTitle: "Makini Pad — Hygiene Works"
 footer:
   headline: "Every girl deserves to stay in school."
   buttons:
-    - label: "Support MHH Works"
+    - label: "Support Hygiene Works"
       url: "/get-involved/#donate"
       class: "btn-white"
 ---
@@ -75,6 +75,6 @@ Apply to receive reusable sanitary kits through our donation program. Due to hig
 
 [Makini Reusable Sanitary Kits Application](#) *(add application link)*
 
-## Support MHH Works
+## Support Hygiene Works
 
 Your gift puts Makini kits and life-changing education directly in the hands of girls who need them most—and brings boys and communities into the solution. Together, we can end period poverty in Kenya and ensure no girl loses her power because of her period.
